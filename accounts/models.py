@@ -20,5 +20,7 @@ class User(AbstractUser):
     phone_number = models.CharField(validators=[phoneNumberRegex], max_length=13, unique=True,
                                     help_text="Please use the following format: 010-1234-5678")
 
+    REQUIRED_FIELDS = ['age', 'gender', 'phone_number']
+
     def __str__(self):
         return self.username
