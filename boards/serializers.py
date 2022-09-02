@@ -18,4 +18,4 @@ class NoticeSerializer(serializers.ModelSerializer):
 class StaffboardSerializer(serializers.ModelSerializer):
     class Meta:
         model = Staffboard
-        fiedls = '__all__'
+        fields = '__all__'
