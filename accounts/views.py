@@ -66,7 +66,7 @@ def statistics(request):
         # 취득한 회원정보 & 통계 목록 체크
         if len(users_info) > 0 and len(type_list) > 0:
             # 회원정보 통계
-            calc_dict = dataprocess.calc_user_data(users_info, type_list)
+            calc_dict = dataprocess.calc_user_data(users_info.values(), type_list)
             result.update(calc_dict)
         return Response(result)
     except Exception as e:

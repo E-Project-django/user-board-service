@@ -185,7 +185,7 @@ def calc_user_data(users_info, type_list):
     views에서 취득한 유저 정보를 이용하여 요청받은 통계 항목을 계산하여 리턴
 
     Args:
-        users_info (data_set): 취득한 유저 정보 set
+        users_info (QuerySet): 취득한 유저 정보
         type_list (list): 요청받은 통계 항목 리스트
 
     Returns:
@@ -193,7 +193,7 @@ def calc_user_data(users_info, type_list):
     """
     result = {}
     # 데이터 프레임 생성
-    user_df = pd.DataFrame(users_info.values())
+    user_df = pd.DataFrame(users_info)
     # 데이터 전처리
     # gender 값 변환(M = male, F = female)
     user_df["gender"].replace(["M", "F"], ["male", "female"], inplace=True)
