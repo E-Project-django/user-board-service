@@ -7,7 +7,7 @@ from .models import Freeboard, Notice, Staffboard
 class FreeboardListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Freeboard
-        exclude = ['update_time', 'content']
+        exclude = ['update_time']
 
 
 class FreeboardSerializer(serializers.ModelSerializer):
@@ -20,7 +20,7 @@ class FreeboardSerializer(serializers.ModelSerializer):
 class NoticeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Freeboard
-        exclude = ['update_time', 'content']
+        exclude = ['update_time']
 
 
 class NoticeSerializer(serializers.ModelSerializer):
@@ -33,7 +33,7 @@ class NoticeSerializer(serializers.ModelSerializer):
 class StaffboardListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Freeboard
-        exclude = ['update_time', 'content']
+        exclude = ['update_time']
 
 
 class StaffboardSerializer(serializers.ModelSerializer):
