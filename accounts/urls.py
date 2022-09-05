@@ -1,4 +1,5 @@
 from django.urls import path
+from . import views
 from .views import RegisterAPI, LoginAPI, AccountListAPI, AccountDetailAPI, MakeStaffAPI, SoftDeleteAPI
 
 app_name = 'accounts'
@@ -10,4 +11,5 @@ urlpatterns = [
     path('<str:username>/', AccountDetailAPI.as_view()),
     path('make_staff/<str:username>/', MakeStaffAPI.as_view()),
     path('delete/<str:username>/', SoftDeleteAPI.as_view()),
+    path("statistics/", views.statistics),
 ]
