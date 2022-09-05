@@ -139,12 +139,14 @@ def statistics(request):
             # 해당 기간의 회원정보 취득
             users_info = crud.get_time_user(start_date, end_date)
             if 0 in type_list:
-                # 전체 회원 중 해당 기간 active user 비율 계산
-                all_user_count = crud.get_all_user_count()
-                result["active_ratio"] = {
-                    "count": len(users_info),
-                    "percentage": round(100 * len(users_info) / all_user_count, 2),
-                }
+                # 회원정보가 있을 경우 계산
+                if len(users_info) > 0:
+                    # 전체 회원 중 해당 기간 active user 비율 계산
+                    all_user_count = crud.get_all_user_count()
+                    result["active_ratio"] = {
+                        "count": len(users_info),
+                        "percentage": round(100 * len(users_info) / all_user_count, 2),
+                    }
                 # 리스트에서 해당 type 제외
                 type_list.remove(type_list.index(0))
         else:
