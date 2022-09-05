@@ -6,9 +6,9 @@ from django.core.validators import RegexValidator
 # 사용자 모델
 class User(AbstractUser):
     """
-     AbstractUser에서 'id, username, first_name, last_name, password, email, is_staff, is_active, data_joined'를 상속받는다.
+     AbstractUser에서 'id, username, first_name, last_name, password, email, is_staff, is_active, date_joined'를 상속받는다.
      추가로 'age, gender, phone_number'를 정의하였다.
-     """
+    """
     CHOICES_GENDER = (
         ('M', 'Male'),
         ('F', 'Female'),
