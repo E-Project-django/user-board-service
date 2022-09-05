@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from boards.models import Freeboard, Notice
+from boards.models import Freeboard, Notice, Staffboard
 User = get_user_model()
 
 
@@ -107,4 +107,55 @@ class NoticeViewSetTest(APITestCase):
 
     def test_user_destory(self):
         response = self.client.delete(reverse('notice-detail', kwargs={'pk': 1}))
+        self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
+
+
+class StaffboardViewSetTest(APITestCase):
+    """ 운영자게시판 Viewset action(list,create,retrieve,update,partial_update,destory)이 정상 작동하는지 확인하기 위한 테스트 """
+
+    def setUp(self):
+        self.staff = User.objects.create_user(
+            username='staff', password='0000', age=25, gender='F', phone_number='010-1234-5678', is_staff=True
+        )
+        self.client.login(username='staff', password='0000')
+        self.staffboard = Staffboard.objects.create(
+            title='운영자 게시판 제목 테스트 첫번째입니다.', content='운영자 게시판 본문 테스트 첫번째입니다.', author_id=self.staff
+        )
+
+    def test_user_create(self):
+        data = {
+            'title': '운영자 게시판 제목 테스트 두번째입니다.',
+            'content': '운영자 게시판 본문 테스트 두번째입니다.',
+            'author_id': 1
+        }
+
+        response = self.client.post(reverse('staffboard-list'), data)
+        self.assertEquals(response.status_code, status.HTTP_201_CREATED)
+
+    def test_user_get_list(self):
+        response = self.client.get(reverse('staffboard-list'))
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+
+    def test_user_get_retrieve(self):
+        response = self.client.get(reverse('staffboard-detail', kwargs={'pk': 1}))
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+
+    def test_user_update(self):
+        update_data = {
+            'title': '운영자 게시판 제목 수정중입니다.',
+            'content': '운영자 게시판 본문 수정중입니다.',
+            'author_id': 1
+        }
+        response = self.client.put(reverse('staffboard-detail', kwargs={'pk': 1}), update_data)
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+
+    def test_user_partial_update(self):
+        partial_update_data = {
+            'content': '운영자 게시판 본문 내용만 수정중입니다.',
+        }
+        response = self.client.patch(reverse('staffboard-detail', kwargs={'pk': 1}), partial_update_data)
+        self.assertEquals(response.status_code, status.HTTP_200_OK)
+
+    def test_user_destory(self):
+        response = self.client.delete(reverse('staffboard-detail', kwargs={'pk': 1}))
         self.assertEquals(response.status_code, status.HTTP_204_NO_CONTENT)
