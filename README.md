@@ -55,7 +55,7 @@
 <img width="608" alt="image" src="https://user-images.githubusercontent.com/95831345/188399711-3305c014-9a1f-4485-ad1f-240c75bd0213.png">
 </div>
 
-<br>
+</br>
 ## 🛠 Unit test
 
 - 핵심 기능이라 판단한 **게시판**과 **통계 분석 api** 에 대해 **총 29개**의 테스트 코드를 작성 ( 게시판테스트 18개, 통계 분석 테스트 11개 )
