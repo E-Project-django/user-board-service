@@ -10,11 +10,10 @@ def get_all_user():
         all_user_info(data_set): 모든 유저 데이터 셋
     """
     try:
-        all_user_info = models.User.objects.all()
+        all_user_info = models.User.objects.filter(is_active=True).all()
         return all_user_info
     except Exception as e:
         print(e)
-
 
 
 def get_time_user(start_date, end_date):
@@ -31,14 +30,20 @@ def get_time_user(start_date, end_date):
     try:
         # 집계 시작일만 지정된 경우
         if start_date == "" and end_date != "":
-            all_user_info = models.User.objects.filter(last_login__lte=end_date)
+            all_user_info = models.User.objects.filter(
+                Q(last_login__lte=end_date) & Q(is_active=True)
+            )
         # 집계 종료일만 지정된 경우
         elif start_date != "" and end_date == "":
-            all_user_info = models.User.objects.filter(last_login__gte=start_date)
+            all_user_info = models.User.objects.filter(
+                Q(last_login__gte=start_date) & Q(is_active=True)
+            )
         # 집계 시작&종료일이 모두 지정된 경우
         else:
             all_user_info = models.User.objects.filter(
-                Q(last_login__gte=start_date) & Q(last_login__lte=end_date)
+                Q(is_active=True)
+                & Q(last_login__gte=start_date)
+                & Q(last_login__lte=end_date)
             )
         return all_user_info
     except Exception as e:
@@ -53,7 +58,7 @@ def get_all_user_count():
         all_user_count(int): 모든 유저의 수
     """
     try:
-        all_user_count = models.User.objects.count()
+        all_user_count = models.User.objects.filter(is_active=True).count()
         return all_user_count
     except Exception as e:
         print(e)
