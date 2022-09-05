@@ -1,4 +1,4 @@
-import unittest
+from django.test import TestCase
 import os
 import sys
 
@@ -13,7 +13,7 @@ from datetime import datetime
 import pandas as pd
 
 
-class TestDataProcess(unittest.TestCase):
+class TestDataProcess(TestCase):
     def setUp(self):
         calc_data = [
             {
@@ -94,16 +94,21 @@ class TestDataProcess(unittest.TestCase):
         pass
 
     def test_age_categorize(self):
+        print("start test_age_categorize")
         age = 25
         result = dataprocess.age_categorize(age)
         self.assertEqual(result, 20)
+        print("finish test_age_categorize")
 
     def test_last_login_categorize(self):
+        print("start test_last_login_categorize")
         last_login = datetime(2022, 9, 22, 10, 31, 11)
         result = dataprocess.last_login_categorize(last_login)
         self.assertEqual(result, 10)
+        print("finish test_last_login_categorize")
 
     def test_calc_ratio(self):
+        print("start test_calc_ratio")
         data = [{"gender": "female", "id": 7}, {"gender": "male", "id": 3}]
         test_df = pd.DataFrame(data)
         result = dataprocess.calc_ratio(test_df)
@@ -112,8 +117,10 @@ class TestDataProcess(unittest.TestCase):
             {"gender": "male", "count": 3, "percentage": 30.0},
         ]
         self.assertEqual(result, exp)
+        print("finish test_calc_ratio")
 
     def test_calc_type_gender(self):
+        print("start test_calc_type_gender")
         result = dataprocess.calc_type_gender(calc_df)
         exp = {
             "gender/all_user": [
@@ -122,8 +129,10 @@ class TestDataProcess(unittest.TestCase):
             ]
         }
         self.assertEqual(result, exp)
+        print("finish test_calc_type_gender")
 
     def test_calc_type_age(self):
+        print("start test_calc_type_age")
         result = dataprocess.calc_type_age(calc_df)
         exp = {
             "age/all_user": [
@@ -136,8 +145,10 @@ class TestDataProcess(unittest.TestCase):
             ]
         }
         self.assertEqual(result, exp)
+        print("finish test_calc_type_age")
 
     def test_calc_type_gender_age(self):
+        print("start test_calc_type_gender_age")
         result = dataprocess.calc_type_gender_age(calc_df)
         exp = {
             "age&gender/all_user": [
@@ -166,8 +177,10 @@ class TestDataProcess(unittest.TestCase):
             ]
         }
         self.assertEqual(result, exp)
+        print("finish test_calc_type_gender_age")
 
     def test_calc_type_male_age(self):
+        print("start test_calc_type_male_age")
         result = dataprocess.calc_type_male_age(calc_df)
         exp = {
             "age/all_male_user": [
@@ -178,8 +191,10 @@ class TestDataProcess(unittest.TestCase):
             ]
         }
         self.assertEqual(result, exp)
+        print("finish test_calc_type_male_age")
 
     def test_type_female_age(self):
+        print("start test_type_female_age")
         result = dataprocess.calc_type_female_age(calc_df)
         exp = {
             "age/all_female_user": [
@@ -189,8 +204,10 @@ class TestDataProcess(unittest.TestCase):
             ]
         }
         self.assertEqual(result, exp)
+        print("finish test_type_female_age")
 
     def test_type_hour(self):
+        print("start test_type_hour")
         result = dataprocess.calc_type_hour(calc_df)
         exp = {
             "hour/all_user": [
@@ -203,8 +220,10 @@ class TestDataProcess(unittest.TestCase):
             ]
         }
         self.assertEqual(result, exp)
+        print("finish test_type_hour")
 
     def test_calc_user_data(self):
+        print("start test_calc_user_data")
         user_data = [
             {
                 "id": 1,
@@ -393,8 +412,4 @@ class TestDataProcess(unittest.TestCase):
             ],
         }
         self.assertEqual(result, exp)
-
-
-# unittest를 실행
-if __name__ == "__main__":
-    unittest.main()
+        print("finish test_calc_user_data")
