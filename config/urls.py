@@ -20,4 +20,5 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')), # DRF Browsable API 로그인
     path('admin/', admin.site.urls),
     path('board/', include('boards.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
