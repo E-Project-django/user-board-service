@@ -14,6 +14,7 @@ import os
 import json
 from pathlib import Path
 
+import rest_framework.authentication
 from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -60,6 +61,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',             # 로그인 토큰
     'core.apps.CoreConfig',
     'accounts.apps.AccountsConfig',
     'boards.apps.BoardsConfig',
@@ -125,6 +128,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',        # 로그인 토큰
+    ]
+}
 
 
 # Internationalization
