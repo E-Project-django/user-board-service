@@ -42,6 +42,10 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(serializers.Serializer):
+    """
+    로그인
+    로그인과 함께 토큰 생성
+    """
     username = serializers.CharField(required=True)
     password = serializers.CharField(required=True, write_only=True)
 
@@ -60,19 +64,37 @@ class LoginSerializer(serializers.Serializer):
         )
 
 
+class UsersSerializer(serializers.ModelSerializer):
+    """
+    유저 목록 조회
+    """
+    class Meta:
+        model = User
+        fields= ['id', 'username', 'age', 'gender', 'phone_number', 'is_active', 'is_staff']
+
+
 class UserSerializer(serializers.ModelSerializer):
+    """
+    단일 유저 조회와 수정
+    """
     class Meta:
         model = User
         fields = ['id', 'username', 'password', 'age', 'gender', 'phone_number']
 
 
 class MakeStaffSerializer(serializers.ModelSerializer):
+    """
+    is_staff 변경
+    """
     class Meta:
         model = User
         fields = ['is_staff']
 
 
 class SoftDeleteSerializer(serializers.ModelSerializer):
+    """
+    is_active 변경
+    """
     class Meta:
         model = User
         fields = ['is_active']
