@@ -1,3 +1,4 @@
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from datetime import datetime
@@ -47,6 +48,10 @@ def statistics(request):
             # 종료일 값이 있는 경우 -> date형식으로 변환
             if end_date != "":
                 end_date = datetime.strptime(end_date, "%Y-%m-%d").date()
+            # 집계 개시일보다 종료일이 늦는 경우 BAD_REQUEST 리턴
+            if start_date != "" and end_date != "":
+                if start_date > end_date:
+                    return Response({"Message": "please check the period."}, status=status.HTTP_400_BAD_REQUEST )
             result["period"] = str(start_date) + " - " + str(end_date)
             # 해당 기간의 회원정보 취득
             users_info = crud.get_time_user(start_date, end_date)
@@ -68,6 +73,6 @@ def statistics(request):
             # 회원정보 통계
             calc_dict = dataprocess.calc_user_data(users_info.values(), type_list)
             result.update(calc_dict)
-        return Response(result)
+        return Response(result, status=status.HTTP_200_OK)
     except Exception as e:
-        return Response({"Message": e}, status=500)
+        return Response({"Message": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
