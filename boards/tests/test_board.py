@@ -15,7 +15,7 @@ class FreeboardViewSetTest(APITestCase):
         self.user = User.objects.create_user(
             username='user', password='0000', age=25, gender='F', phone_number='010-1234-5678'
         )
-        self.client.login(username='user', password='0000')
+        self.client.force_authenticate(self.user)
         self.freeboard = Freeboard.objects.create(
             title='자유게시판 제목 테스트 첫번째입니다.', content='자유게시판 본문 테스트 첫번째입니다.', author_id=self.user
         )
@@ -66,7 +66,7 @@ class NoticeViewSetTest(APITestCase):
         self.staff = User.objects.create_user(
             username='staff', password='0000', age=25, gender='F', phone_number='010-1234-5678', is_staff= True
         )
-        self.client.login(username='staff', password='0000')
+        self.client.force_authenticate(self.staff)
         self.notice = Notice.objects.create(
             title='공지사항 제목 테스트 첫번째입니다.', content='공지사항 본문 테스트 첫번째입니다.', author_id=self.staff
         )
@@ -117,7 +117,7 @@ class StaffboardViewSetTest(APITestCase):
         self.staff = User.objects.create_user(
             username='staff', password='0000', age=25, gender='F', phone_number='010-1234-5678', is_staff=True
         )
-        self.client.login(username='staff', password='0000')
+        self.client.force_authenticate(self.staff)
         self.staffboard = Staffboard.objects.create(
             title='운영자 게시판 제목 테스트 첫번째입니다.', content='운영자 게시판 본문 테스트 첫번째입니다.', author_id=self.staff
         )
