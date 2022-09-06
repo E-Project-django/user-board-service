@@ -44,7 +44,7 @@ class Staffboard(TimeStampModel):
      TimeStampedModel의 'create_time', 'update_time'필드가 Staffboard 모델에 포함된다.
      """
     title = models.CharField(max_length=100)
-    content = models.TextField
+    content = models.TextField()
     author_id = models.ForeignKey(
         'accounts.User', null=True, on_delete=models.SET_NULL, db_column='author_id', related_name='staffboard')
 

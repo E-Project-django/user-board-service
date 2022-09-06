@@ -1,9 +1,11 @@
 from django.urls import path
+from . import views
 from .views import RegisterAPI, LoginAPI, AccountListAPI, AccountDetailAPI, MakeStaffAPI, SoftDeleteAPI
 
 app_name = 'accounts'
 
 urlpatterns = [
+    path("statistics/", views.statistics),
     path('register/', RegisterAPI.as_view(), name='register'),
     path('login/', LoginAPI.as_view(), name='login'),
     path('list/', AccountListAPI.as_view(), name='list'),
