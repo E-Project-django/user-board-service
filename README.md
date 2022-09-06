@@ -7,13 +7,13 @@
 |윤성문|이승현|정병휘|한송희|
 |:------:|:------:|:------:|:------:|
 |[Github](https://github.com/tjdans1201) | [Github](https://github.com/blessian) | [Github](https://github.com/byeonghwijeong) | [Github](https://github.com/song-hee-1) |
-|회원 API 개발|통계 API 개발|문서화|게시판 API 개발|
+|통계 API 개발|회원 API 개발|문서화|게시판 API 개발|
 
 
 </br>
 
 ## ⏳ 개발 기간
-2022.08.31 ~ 2022.09.05   
+**2022.08.31 ~ 2022.09.05**
 
 </br>
   
